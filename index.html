@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue Js</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>	
+	<style type="text/css">
+		.foo{
+			min-height: 222px;
+			width: 960px;
+			margin: 44px auto;
+			text-align: center;
+			background: #DBF2B5;
+		}
+
+		.bar-enter-active, .bar-leave-active {
+		  transition: margin-left 1s;
+		}
+		.bar-enter, .bar-leave-to  {
+		  margin-left: -222px;
+		}
+
+	
+
+
+	</style>
+</head>
+<body>
+
+<div id="root">	
+	<button @click="show = !show">Toggle</button>
+
+	<transition name="bar">	
+		<div class="foo" v-show="show"> Hello World </div>
+	</transition>
+
+	<h1>Skills</h1> <hr>
+	<input type="text" placeholder="Enter skill" v-model="newSkill">
+	<button v-on:click="addSkill()"> Add </button>
+	<br><br><br>
+	<ul>
+		<transition-group name="bar">	
+			<li v-for="(skill, i) in skills" :key="i">
+				<p>{{skill}} <button @click="removeSkill(i)">x</button></p>
+			</li>
+		</transition-group>	
+	</ul>
+
+	
+</div>
+
+<script type="text/javascript" src="vue.js"></script>
+<script type="text/javascript">
+
+	var app = new Vue({
+		el: "#root",
+		data: {
+			show: false,
+			newSkill: "",
+			skills: ["HTML", "CSS", "JS"] 
+		},
+
+		methods:{
+			addSkill: function(){
+				this.skills.push(this.newSkill);
+				this.newSkill = "";
+			},
+
+			removeSkill: function(i){
+				this.skills.splice(i, 1);
+			}
+		}
+	});
+	
+</script>
+
+</body>
+</html>
